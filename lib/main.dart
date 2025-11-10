@@ -45,7 +45,6 @@ class AqarHubApp extends StatelessWidget {
             useMaterial3: true,
             primaryColor: const Color(0xFF1B4B8C),
             scaffoldBackgroundColor: Colors.white,
-            fontFamily: 'Roboto',
 
             colorScheme: ColorScheme.fromSeed(
               seedColor: const Color(0xFF1B4B8C),

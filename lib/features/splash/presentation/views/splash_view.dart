@@ -1,3 +1,5 @@
+import 'package:aqar_hub/core/router/route_names.dart';
+import 'package:aqar_hub/core/services/navigation_service.dart';
 import 'package:aqar_hub/features/splash/data/models/splash_animation_config.dart';
 import 'package:aqar_hub/features/splash/presentation/manager/splash_animation_manager.dart';
 import 'package:aqar_hub/features/splash/presentation/widgets/splash_background_widget.dart';
@@ -51,16 +53,9 @@ class _SplashViewState extends State<SplashView> with TickerProviderStateMixin {
     });
   }
 
-  /// Handle navigation to next screen
+  ///  navigation to next screen
   void _handleNavigation() {
-    // TODO: Change this to your desired route
-    // Example: NavigationService.navigateToAndReplace(context, RouteNames.onboarding);
-    // Or: NavigationService.navigateToAndReplace(context, RouteNames.home);
-
-    // For now, just log (uncomment the line below when ready)
-    // NavigationService.navigateToAndReplace(context, RouteNames.home);
-
-    debugPrint('Navigation to next screen - Ready!');
+    NavigationService.navigateToAndReplace(context, RouteNames.onboarding);
   }
 
   @override
