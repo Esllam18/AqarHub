@@ -1,4 +1,5 @@
 import 'package:aqar_hub/core/consts/app_assets.dart';
+import 'package:aqar_hub/core/utils/responsive_helper.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedLogoWidget extends StatelessWidget {
@@ -7,14 +8,22 @@ class AnimatedLogoWidget extends StatelessWidget {
   final Animation<double> fadeAnimation;
 
   const AnimatedLogoWidget({
-    Key? key,
+    super.key,
     required this.scaleAnimation,
     required this.rotateAnimation,
     required this.fadeAnimation,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
+    // Responsive logo size
+    final logoSize = ResponsiveHelper.responsive<double>(
+      context: context,
+      mobile: 100.0,
+      tablet: 200.0,
+      desktop: 250.0,
+    );
+
     return AnimatedBuilder(
       animation: Listenable.merge([
         scaleAnimation,
@@ -28,7 +37,11 @@ class AnimatedLogoWidget extends StatelessWidget {
             angle: rotateAnimation.value,
             child: Opacity(
               opacity: fadeAnimation.value,
-              child: Image.asset(AppImages.logoIcon, width: 150, height: 150),
+              child: Image.asset(
+                AppImages.logo,
+                width: ResponsiveHelper.width(logoSize),
+                height: ResponsiveHelper.height(logoSize),
+              ),
             ),
           ),
         );

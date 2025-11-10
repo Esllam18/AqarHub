@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 class SplashBackgroundWidget extends StatelessWidget {
   final Animation<double> backgroundAnimation;
 
-  const SplashBackgroundWidget({Key? key, required this.backgroundAnimation})
-    : super(key: key);
+  const SplashBackgroundWidget({super.key, required this.backgroundAnimation});
 
   @override
   Widget build(BuildContext context) {

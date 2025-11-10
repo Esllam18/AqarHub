@@ -1,5 +1,7 @@
-import 'package:aqar_hub/core/consts/app_assets.dart';
+import 'package:aqar_hub/core/consts/app_colors.dart';
+import 'package:aqar_hub/core/utils/responsive_helper.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AnimatedTextWidget extends StatelessWidget {
   final Animation<double> slideAnimation;
@@ -7,14 +9,35 @@ class AnimatedTextWidget extends StatelessWidget {
   final bool isArabic;
 
   const AnimatedTextWidget({
-    Key? key,
+    super.key,
     required this.slideAnimation,
     required this.fadeAnimation,
     this.isArabic = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
+    final fontSize = ResponsiveHelper.responsive<double>(
+      context: context,
+      mobile: 24.0,
+      tablet: 38.0,
+      desktop: 48.0,
+    );
+
+    final text = isArabic ? 'عقار هاب' : 'AqarHub';
+
+    final textStyle = isArabic
+        ? GoogleFonts.arefRuqaa(
+            fontSize: ResponsiveHelper.fontSize(fontSize + 5),
+            fontWeight: FontWeight.bold,
+            color: AppColors.primary,
+          )
+        : GoogleFonts.lora(
+            fontSize: ResponsiveHelper.fontSize(fontSize),
+            fontWeight: FontWeight.w700,
+            color: AppColors.primary,
+          );
+
     return AnimatedBuilder(
       animation: Listenable.merge([slideAnimation, fadeAnimation]),
       builder: (context, child) {
@@ -22,11 +45,7 @@ class AnimatedTextWidget extends StatelessWidget {
           offset: Offset(0, slideAnimation.value),
           child: Opacity(
             opacity: fadeAnimation.value,
-            child: Image.asset(
-              isArabic ? AppImages.arabicText : AppImages.englishText,
-              width: 200,
-              height: 60,
-            ),
+            child: Text(text, style: textStyle, textAlign: TextAlign.center),
           ),
         );
       },

@@ -1,52 +1,73 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class Responsive {
-  final BuildContext context;
-  final Size _size;
+class ResponsiveHelper {
+  /// Screen width
+  static double screenWidth(BuildContext context) =>
+      MediaQuery.of(context).size.width;
 
-  Responsive(this.context) : _size = MediaQuery.of(context).size;
+  /// Screen height
+  static double screenHeight(BuildContext context) =>
+      MediaQuery.of(context).size.height;
 
-  /// 📱 عرض الشاشة
-  double get width => _size.width;
+  /// Responsive width (percentage based)
+  static double widthPercentage(BuildContext context, double percentage) =>
+      screenWidth(context) * (percentage / 100);
 
-  /// 📱 ارتفاع الشاشة
-  double get height => _size.height;
+  /// Responsive height (percentage based)
+  static double heightPercentage(BuildContext context, double percentage) =>
+      screenHeight(context) * (percentage / 100);
 
-  /// 🔠 نسبة حجم النص
-  double setFont(double size) => size * (width / 375);
+  /// Check if device is mobile (width < 600)
+  static bool isMobile(BuildContext context) => screenWidth(context) < 600;
 
-  /// ↔️ نسبة عرض عنصر
-  double setWidth(double inputWidth) => (inputWidth / 375.0) * width;
+  /// Check if device is tablet (600 <= width < 1024)
+  static bool isTablet(BuildContext context) {
+    final width = screenWidth(context);
+    return width >= 600 && width < 1024;
+  }
 
-  /// ↕️ نسبة ارتفاع عنصر
-  double setHeight(double inputHeight) => (inputHeight / 812.0) * height;
+  /// Check if device is desktop (width >= 1024)
+  static bool isDesktop(BuildContext context) => screenWidth(context) >= 1024;
 
-  /// ✅ اختصار لمعرفة نوع الشاشة
-  bool get isMobile => width < 600;
-  bool get isTablet => width >= 600 && width < 1024;
-  bool get isDesktop => width >= 1024;
+  /// Responsive font size using ScreenUtil
+  static double fontSize(double size) => size.sp;
+
+  /// Responsive width using ScreenUtil
+  static double width(double width) => width.w;
+
+  /// Responsive height using ScreenUtil
+  static double height(double height) => height.h;
+
+  /// Responsive radius using ScreenUtil
+  static double radius(double radius) => radius.r;
+
+  /// Responsive spacing (horizontal)
+  static double horizontalSpacing(double spacing) => spacing.w;
+
+  /// Responsive spacing (vertical)
+  static double verticalSpacing(double spacing) => spacing.h;
+
+  /// Get responsive value based on device type
+  static T responsive<T>({
+    required BuildContext context,
+    required T mobile,
+    T? tablet,
+    T? desktop,
+  }) {
+    if (isDesktop(context) && desktop != null) {
+      return desktop;
+    } else if (isTablet(context) && tablet != null) {
+      return tablet;
+    }
+    return mobile;
+  }
+
+  /// Safe area padding
+  static EdgeInsets safeAreaPadding(BuildContext context) =>
+      MediaQuery.of(context).padding;
+
+  /// Device pixel ratio
+  static double pixelRatio(BuildContext context) =>
+      MediaQuery.of(context).devicePixelRatio;
 }
-
-// 📌 - إزاي تستخدمه
-// مثال في أي Widget:
-
-// @override
-// Widget build(BuildContext context) {
-//   final responsive = Responsive(context);
-
-//   return Scaffold(
-//     body: Center(
-//       child: Container(
-//         width: responsive.setWidth(200),   // 200 بالنسبة لعرض شاشة 375
-//         height: responsive.setHeight(100), // 100 بالنسبة لارتفاع شاشة 812
-//         color: Colors.blue,
-//         child: Text(
-//           "Hello Responsive",
-//           style: TextStyle(
-//             fontSize: responsive.setFont(16), // الخط متجاوب
-//           ),
-//         ),
-//       ),
-//     ),
-//   );
-// }
