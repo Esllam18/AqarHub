@@ -3,13 +3,18 @@ import 'package:go_router/go_router.dart';
 
 class NavigationService {
   /// Navigate to route using GoRouter
-  static void navigateTo(BuildContext context, String routeName) {
-    context.go(routeName);
+  static void navigateTo(BuildContext context, String routeName, {Object? extra}) {
+    context.push(routeName, extra: extra);
   }
 
   /// Navigate to route and replace using GoRouter
   static void navigateToAndReplace(BuildContext context, String routeName) {
     context.pushReplacement(routeName);
+  }
+
+  /// Navigate and clear stack (using go)
+  static void navigateAndClear(BuildContext context, String routeName) {
+    context.go(routeName);
   }
 
   /// Navigate back

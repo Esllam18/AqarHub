@@ -44,14 +44,15 @@ class AppValidators {
   }
 
   /// ✅ Validate Phone Number (E.164 format)
+  /// ✅ Validate Phone Number
   static String? validatePhone(String? value) {
     if (value == null || value.trim().isEmpty) {
       return 'Phone number cannot be empty';
     }
-    // E.164 regex: starts with +, country code (1–3 digits), then 4–14 digits
-    final regex = RegExp(r'^\+[1-9]\d{1,14}$');
-    if (!regex.hasMatch(value)) {
-      return 'Enter phone in E.164 format (e.g. +201234567890)';
+    // Allow E.164 OR local numbers (9-15 digits)
+    final regex = RegExp(r'^(\+)?[0-9]{9,15}$');
+    if (!regex.hasMatch(value.trim())) {
+      return 'Enter a valid phone number';
     }
     return null;
   }

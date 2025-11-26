@@ -1,4 +1,6 @@
 import 'package:aqar_hub/core/consts/app_colors.dart';
+import 'package:aqar_hub/core/router/route_names.dart';
+import 'package:aqar_hub/core/services/navigation_service.dart';
 import 'package:aqar_hub/features/onboarding/data/datasources/onboarding_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -53,7 +55,7 @@ class _OnboardingViewState extends State<OnboardingView> {
     // TODO: Navigate to home or login
     // NavigationService.navigateToAndReplace(context, RouteNames.home);
     // OR
-    // NavigationService.navigateToAndReplace(context, RouteNames.login);
+    NavigationService.navigateToAndReplace(context, RouteNames.welcome);
   }
 
   @override

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "775678673132",
+    "project_id": "aqarhub",
+    "storage_bucket": "aqarhub.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:775678673132:android:8eb486714befce123325c9",
+        "android_client_info": {
+          "package_name": "com.example.aqar_hub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlKx7jrg6Nn32qwNt_tUBxv0G5WTgclA4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

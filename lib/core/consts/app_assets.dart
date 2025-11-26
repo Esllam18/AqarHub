@@ -8,6 +8,8 @@ class AppImages {
   static const String onboarding_3 = 'assets/images/onboarding_3.jpg';
 }
 
-class AppIcons {}
+class AppIcons {
+  static const String google = 'assets/icons/googleIcon.png';
+}
 
 class AppBanners {}
